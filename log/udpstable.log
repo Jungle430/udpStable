@@ -1,7 +1,0 @@
-time="2023-12-09T21:24:18+08:00" level=warning msg="read udp 127.0.0.1:50314: i/o timeout" func=udpStable/sender.SenderWithoutPort file="D:/work for vscode/udpStable/sender/sender.go:56"
-time="2023-12-09T21:24:18+08:00" level=warning msg="[72 101 108 108 111 32 119 111 114 108 100] <nil>" func=main.main file="D:/work for vscode/udpStable/main.go:28"
-time="2023-12-09T21:25:16+08:00" level=warning msg="read udp 127.0.0.1:52785: i/o timeout" func=udpStable/sender.SenderWithoutPort file="D:/work for vscode/udpStable/sender/sender.go:56"
-time="2023-12-09T21:25:16+08:00" level=warning msg="[72 101 108 108 111 32 119 111 114 108 100] <nil>" func=main.main file="D:/work for vscode/udpStable/main.go:28"
-time="2023-12-09T21:25:40+08:00" level=warning msg="read udp 127.0.0.1:50783: i/o timeout" func=udpStable/sender.SenderWithoutPort file="D:/work for vscode/udpStable/sender/sender.go:56"
-time="2023-12-09T21:25:40+08:00" level=warning msg="<nil>" func=main.main file="D:/work for vscode/udpStable/main.go:23"
-time="2023-12-09T21:25:40+08:00" level=warning msg="[72 101 108 108 111 32 119 111 114 108 100] <nil>" func=main.main file="D:/work for vscode/udpStable/main.go:26"
