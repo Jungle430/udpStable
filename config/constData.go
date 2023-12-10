@@ -13,6 +13,16 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// 通信类型
+type CommunicationType string
+
+const (
+	// 服务器
+	SERVER CommunicationType = "server"
+	// 客户端
+	CLIENT CommunicationType = "client"
+)
+
 const (
 	// 缓冲区大小
 	BUFFER_SIZE int = 1 << 12
@@ -35,8 +45,14 @@ const (
 	// 私有密钥配置文件
 	PRIVATE_KEY_FILE string = "resource/private_key.json"
 
-	// 日志文件
-	LOG_FILE string = "log/udpstable.log"
+	// 日志文件(客户端)
+	CLIENT_LOG_FILE string = "log/udpstable-client.log"
+
+	// 日志文件(服务端)
+	SERVER_LOG_FILE string = "log/udpstable-server.log"
+
+	// 启动命令行的模式
+	COMMAND_FORMAT string = "go run main.go <server|client> <port>"
 )
 
 var (
@@ -101,12 +117,27 @@ func InitPortAndPrivateKey() {
 }
 
 // 初始化日志配置
-func InitLog() *os.File {
+func InitLog(fileType CommunicationType) *os.File {
 	// 指定输出格式和级别
 	log.SetReportCaller(true)
 	log.SetLevel(log.InfoLevel)
+
 	// 记录日志的文件
-	logFile, err := os.OpenFile(LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	var (
+		logFile *os.File
+		err     error
+	)
+
+	// 根据参数来选取模式
+	switch fileType {
+	case CLIENT:
+		logFile, err = os.OpenFile(CLIENT_LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	case SERVER:
+		logFile, err = os.OpenFile(SERVER_LOG_FILE, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	default:
+		panic(COMMAND_FORMAT)
+	}
+
 	if err != nil {
 		log.Panic(err)
 	}
