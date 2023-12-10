@@ -175,7 +175,12 @@ func SenderWithPort(data []byte, sourceAddress net.IP, sourcePort int, destinati
 		if err != nil {
 			log.Warn(err)
 			// 再次发送信息
-			m, _ = senderWithPort(data, sourceAddress, sourcePort, destinationAddress, destinationPort)
+			
+			// 重新发送
+			conn.Close()
+			m, _ = senderWithoutPort(data, sourceAddress, destinationAddress, destinationPort)
+
+			// 继续监听
 			conn, err = net.ListenUDP("udp", serverAddr)
 			if err != nil {
 				log.Warn("监听失败,错误:", err)
